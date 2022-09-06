@@ -2,7 +2,7 @@
 
 # Requirement:
 
-- Database: PostgreSQL 10.0 or higher with PostGIS 3.0 extension or higher.
+- Database: PostgreSQL 10.0 or higher.
 - Programming language: Python 3.8 or higher.
 - Python libraries: Django 4.1 or higher, Django REST Framework 3.12 or higher,
   psycopg2 2.8 or higher.
