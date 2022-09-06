@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <title>Список всех фермерских рынков</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <h2 class="text-center"><u>фермерские рынки</u></h2><br>
+
+    <table class="table table-dark table-striped">
+
+        <thead>
+        <br>
+        <p>
+            <form action="{% url 'get_by_entry' %}" method="get" accept-charset="utf-8">
+                <div class="form-group">
+                    <i>страна,город,индекс,штат</i><br>
+                    <label for="site-search">Поиск:</label>
+                        <input type="search" id="site-search" name="query">
+                                <button>Search</button>
+                </div>
+        </form>
+        </p>
+        <br>
+        <tr>
+            <th>Название фермерских рынков</th>
+
+            <th>Страна</th>
+
+            <th>Штат</th>
+
+            <th>Город</th>
+
+            <th>Индекс</th>
+
+            <th>Рецензия</th>
+
+            <th>Рейтинг</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+        {% if d %}
+
+        {% for i in d %}
+
+        <!-- jinja2 Technique -->
+        <tr>
+            <td>{{i.market_name}}</td>
+
+            <td>{{i.country}}</td>
+
+            <td>{{i.state}}</td>
+
+            <td>{{i.city}}</td>
+
+            <td>{{i.zip}}</td>
+
+            <td>{{i.comment__reviews}}</td>
+
+            <td>{{i.comment__ratings}}</td>
+
+        </tr>
+
+        {% endfor %}
+
+        <div class="pagination">
+    <span class="step-links">
+        {% if d.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ d.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ d.number }} of {{ d.paginator.num_pages }}.
+        </span>
+
+        {% if d.has_next %}
+            <a href="?page={{ d.next_page_number }}">next</a>
+            <a href="?page={{ d.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+        </div>
+
+        {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+</body>
+
+</html> 

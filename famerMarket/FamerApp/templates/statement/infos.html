@@ -1,0 +1,36 @@
+{% extends "statement/base.html" %}
+{% load static %}
+{% block content %}
+<br>
+{% for i in data %}
+
+<h1>Welcome in {{i.market_name}}</h1>
+<p>To make your purchases in our market go to this address:
+    <strong><i>{{i.zip}},country:{{i.country}},state:{{i.state}},city:{{i.city}}</i></strong>
+</p>
+<p>
+<h1><a href="{{i.web_site}}" style="margin-left: 300px"> WEB SITE</a></h1>
+</p>
+<p>Here are the products available in our market: </p>
+{% for p in products %}
+<ul>
+    <li>
+        <strong>{{p}}</strong>
+    </li>
+</ul>
+{% endfor %}
+{% endfor %}
+<br>
+<br>
+{% for i in data %}
+<a href="{% url 'comment' i.market_name %}" class="btn btn-primary">Add Comment</a>
+<a href="{% url 'delete_comment' i.market_name %}" class="btn btn-danger" style="margin-left:500px">Delete all Comment</a>
+
+{% endfor %}
+
+<div class="card-footer text-muted">
+    {% for c in comments %}
+    <p><strong>{{c.username}}</strong>: {{c.reviews}} <strong>likes</strong>: {{c.ratings}}&#9733 <hr> </p>
+{% endfor %}
+</div>
+{% endblock %}
